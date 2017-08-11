@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@1/dist/instantsearch.min.css" />
+    <title>instantsearch.js basics</title>
+  </head>
+  <body>
+    <input type="text" id="search-box" />
+    <div id="hits-container"></div>
+    <div id="pagination-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@1/dist/instantsearch.min.js"></script>
+    <script>
+      var search = instantsearch({
+      appId: 'D81M20G6DM',
+      apiKey: 'c65084653209a5717ea09374abd9b749',
+      indexName: 'bestbuy'
+      });
+
+      search.addWidget(
+        instantsearch.widgets.searchBox({
+          container: '#search-box',
+          placeholder: 'Search for products...'
+        })
+      );
+
+      search.addWidget(
+    instantsearch.widgets.hits({
+      container: '#hits-container',
+      templates: {
+        empty: 'No results',
+        item: '<strong>Hit {{objectID}}</strong>: {{{_highlightResult.name.value}}}'
+      },
+      hitsPerPage: 6
+    })
+  );
+
+      search.addWidget(
+        instantsearch.widgets.pagination({
+          container: '#pagination-container'
+        })
+      );
+
+      search.start();
+    </script>
+  </body>
+</html>
